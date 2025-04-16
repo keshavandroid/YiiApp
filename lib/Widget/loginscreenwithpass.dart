@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/homescreen.dart';
 
 import '../const/color.dart';
 import 'authenticate_screen.dart';
+import 'forgotpasswordscreen.dart';
 
 class Loginscreenwithpass extends StatefulWidget {
   const Loginscreenwithpass({super.key});
@@ -89,7 +91,15 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     width: 200,
                                     height: 50,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Homescreen(),
+                                          ),
+                                        );
+
+                                      },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(
                                           0xFF3E5622,
@@ -115,7 +125,12 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                 const SizedBox(width: 10),
                                 GestureDetector(
                                   onTap: () {
-                                    // Add your action here
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const Forgotpasswordscreen(),
+                                      ),
+                                    );
                                   },
                                   child: const Text(
                                     'Forgot Password?',
@@ -133,13 +148,23 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                     ),
                     // Tab View content
                     const SizedBox(height: 50),
-                    Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        "Don’t have an account ? Register",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: AppColors.blacktextcolor,
+
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AuthenticateScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Don’t have an account ? Register",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.blacktextcolor,
+                          ),
                         ),
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/verifyotpscreen.dart';
 
 import '../const/color.dart';
 import 'authenticate_screen.dart';
@@ -11,7 +12,8 @@ class LoginscreenwithotpScreen extends StatefulWidget {
   State<LoginscreenwithotpScreen> createState() => _LoginscreenwithotpState();
 }
 
-class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with SingleTickerProviderStateMixin {
+class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -22,12 +24,14 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
     _controller = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
-    )..forward();
+    )
+      ..forward();
 
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
 
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home'); // Replace with your actual route
+      Navigator.pushReplacementNamed(
+          context, '/home'); // Replace with your actual route
     });
   }
 
@@ -47,7 +51,10 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
             right: 0,
             left: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.9,
               height: 219,
               child: Image.asset(
                 'assets/images/topgn.png',
@@ -103,12 +110,23 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
                                     width: 200,
                                     height: 50,
                                     child: ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) =>
+                                            const Verifyotpscreen(),
+                                          ),
+                                        );
+                                      },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xFF3E5622),
+                                        backgroundColor: const Color(
+                                            0xFF3E5622),
                                         // green shade
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30),
+                                          borderRadius: BorderRadius.circular(
+                                              30),
                                         ),
                                       ),
 
@@ -124,7 +142,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
                                 ),
                                 const SizedBox(width: 10),
                                 GestureDetector(
-                                  onTap: () {// Add your action here
+                                  onTap: () { // Add your action here
                                   },
                                   child: const Text(
                                     'Resend Code',
@@ -144,25 +162,12 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
                     ),
                     // Tab View content
                     const SizedBox(height: 50),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder:
-                                  (context) => const AuthenticateScreen(),
-                            ),
-                          );
+
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          print("Text clicked");
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF3E5622),
-                          // green shade
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                        ),
                         child: Text(
                           "Don’t have an account ? Register",
                           style: const TextStyle(
@@ -171,7 +176,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
                           ),
                         ),
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
@@ -182,7 +187,10 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
             right: 0,
             left: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.9,
               height: 191,
               child: Image.asset(
                 'assets/images/btngreen.png',
@@ -196,6 +204,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen> with Sing
   }
 
 }
+
 Widget buildTextField(String hint, {bool obscureText = false}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 5.0),

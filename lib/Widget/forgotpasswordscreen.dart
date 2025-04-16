@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/authenticate_screen.dart';
 
 import '../const/color.dart';
 
@@ -163,13 +164,26 @@ class _ForgotpasswordscreenState extends State<Forgotpasswordscreen>
                     const SizedBox(height: 50),
                     Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        "Already have an account ? Login",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: AppColors.blacktextcolor,
+                      child:GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AuthenticateScreen(),
+                            ),
+                          );
+                        },
+                        child: const Center(
+                          child: Text(
+                            "Already have an account ? Login",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: AppColors.blacktextcolor,
+                            ),
+                          ),
                         ),
-                      ),
+                      )
+
                     ),
                   ],
                 ),
