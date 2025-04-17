@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yii_app/const/color.dart';
 
+import '../common/CustomBottomNavBar.dart';
+
 class Homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,22 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: Colors.green[300],
+        backgroundColor: Colors.transparent,
         elevation: 0,
         automaticallyImplyLeading: false,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/top.png'),
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset('assets/images/logo.png', height: 40),
+            Image.asset(''
+                '/images/logo.png', height: 40),
             Text('Roger & Lydia', style: TextStyle(fontSize: 20)),
             Row(
               children: [
@@ -194,44 +205,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: AppColors.greentextcolor,
-        // Color for the selected item
-        unselectedItemColor: AppColors.blacktextcolor,
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/ic_home.png'),
-              color: AppColors.greentextcolor,
-            ),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/ic_history.png'),
-              color: AppColors.blacktextcolor,
-            ),
-            label: "History",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/ic_cart.png'),
-              color: AppColors.blacktextcolor,
-            ),
-            label: "Cart",
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(
-              AssetImage('assets/images/ic_profile.png'),
-              color: AppColors.blacktextcolor,
-            ),
-            label: "Profile",
-          ),
-        ],
-      ),
+      bottomNavigationBar:const CustomBottomNavBar(currentIndex: 0),
     );
   }
 }
