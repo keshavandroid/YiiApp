@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
           // Center image
           Center(
             child: Image.asset(
-              'assets/images/logo.png', // Replace with your middle image path
+              'assets/images/logo.webp', // Replace with your middle image path
               width: 294,
               height: 271,
             ),

@@ -23,8 +23,9 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomHeader(title: "Address"),
+      backgroundColor: const Color(0xFFF8F8F8),
 
+      appBar: CustomHeader(title: "Address"),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: ListView.builder(

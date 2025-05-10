@@ -135,7 +135,7 @@ class _ForgotpasswordscreenState extends State<Forgotpasswordscreen>
                             Align(
                               alignment: Alignment.centerLeft,
                               child: SizedBox(
-                                width: 200,
+                                width: 150,
                                 height: 50,
                                 child: ElevatedButton(
                                   onPressed: () {},
@@ -196,7 +196,7 @@ class _ForgotpasswordscreenState extends State<Forgotpasswordscreen>
             left: 0,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              height: 191,
+              height: 175,
               child: Image.asset(
                 'assets/images/btngreen.png',
                 fit: BoxFit.fitWidth,

@@ -107,7 +107,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
                                 Align(
                                   alignment: Alignment.centerLeft,
                                   child: SizedBox(
-                                    width: 200,
+                                    width: 150,
                                     height: 50,
                                     child: ElevatedButton(
                                       onPressed: () {
@@ -121,17 +121,15 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
                                         );
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(
-                                            0xFF3E5622),
+                                        backgroundColor: const Color(0xFF3E5622),
                                         // green shade
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              30),
+                                          borderRadius: BorderRadius.circular(30),
                                         ),
                                       ),
 
                                       child: const Text(
-                                        'Sent OTP',
+                                        'Send OTP',
                                         style: TextStyle(
                                           fontSize: 18,
                                           color: Colors.white,
@@ -140,7 +138,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                // const SizedBox(height: 15),
                                 GestureDetector(
                                   onTap: () { // Add your action here
                                   },
@@ -191,7 +189,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
                   .of(context)
                   .size
                   .width * 0.9,
-              height: 191,
+              height: 175,
               child: Image.asset(
                 'assets/images/btngreen.png',
                 fit: BoxFit.fitWidth,

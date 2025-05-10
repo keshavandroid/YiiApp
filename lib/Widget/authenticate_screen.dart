@@ -270,7 +270,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
             left: 0,
             child: Container(
               width: MediaQuery.of(context).size.width * 0.9,
-              height: 191,
+              height: 175,
               child: Image.asset(
                 'assets/images/btngreen.png',
                 fit: BoxFit.fitWidth,

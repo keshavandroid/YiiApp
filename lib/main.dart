@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:yii_app/Widget/splash_screen.dart';
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.black, // sets the background color
+    statusBarIconBrightness: Brightness.dark, // makes icons dark on white background
+  ));
   runApp(const MyApp());
 }
 

@@ -173,7 +173,7 @@ class _VerifyotpState extends State<Verifyotpscreen>
                   .of(context)
                   .size
                   .width * 0.9,
-              height: 191,
+              height: 175,
               child: Image.asset(
                 'assets/images/btngreen.png',
                 fit: BoxFit.fitWidth,
