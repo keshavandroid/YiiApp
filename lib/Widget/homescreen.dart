@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yii_app/Widget/productscreen.dart';
 import 'package:yii_app/const/color.dart';
 
 import '../common/CustomBottomNavBar.dart';
@@ -228,7 +229,12 @@ class _HomescreenState extends State<Homescreen>
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Productscreen()),
+                            );
+                          },
                           style: TextButton.styleFrom(
                             backgroundColor: AppColors.btncolor,
                             // Set the background color

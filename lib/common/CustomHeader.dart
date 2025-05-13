@@ -16,10 +16,11 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
       ),
       body: Container(
         padding: EdgeInsets.all(10),
-        height: 100, // Set desired height of the top image area
+        height: 99, // Set desired height of the top image area
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/top.png'),
+
             fit: BoxFit.cover,
           ),
         ),
@@ -30,8 +31,15 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(bottom: 40),
               child: Row(
                 children: [
-                  Image.asset('assets/images/back.png', height: 42),
-                  // Space between back button and title
+
+                  GestureDetector(
+                    onTap: () {
+                      // Handle the click event here
+                      print('Back button clicked');
+                      Navigator.pop(context); // Example: Navigate back
+                    },
+                    child: Image.asset('assets/images/back.png', height: 42),
+                  ),                  // Space between back button and title
                   Expanded(
                     child: Center(
                       child: Text(
@@ -55,7 +63,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => const Size.fromHeight(200);
+  Size get preferredSize => const Size.fromHeight(170);
 }
 
 // const Center(

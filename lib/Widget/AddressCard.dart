@@ -17,6 +17,7 @@ class AddressCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Card(
+        color: Colors.white,
         margin: const EdgeInsets.symmetric(vertical: 8),
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

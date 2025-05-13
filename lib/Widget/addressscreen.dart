@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/select_address_screen.dart';
 
 import '../common/CustomBottomNavBar.dart';
 import '../common/CustomHeader.dart';
@@ -24,10 +25,9 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-
       appBar: CustomHeader(title: "Address"),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(left: 10,right: 10),
         child: ListView.builder(
           itemCount: addresses.length,
           itemBuilder: (context, index) {
@@ -45,10 +45,13 @@ class _AddressScreenState extends State<AddressScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add new address
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SelectAddressScreen()),
+            );
         },
         backgroundColor: const Color(0xFF39B9BC),
-        child: const Icon(Icons.add, size: 32),
+        child: const Icon(Icons.add, size: 32, color: Colors.white),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
        bottomNavigationBar: const CustomBottomNavBar(currentIndex: 3),
