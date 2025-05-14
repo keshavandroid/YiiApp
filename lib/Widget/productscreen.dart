@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/productdetailpage.dart';
 import 'package:yii_app/const/color.dart';
 
 import '../common/CustomBottomNavBar.dart';
@@ -73,32 +74,42 @@ class _ProductscreenState extends State<Productscreen>
                       childAspectRatio: 0.9,
                     ),
                     itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(30),
-                          boxShadow: [
-                            BoxShadow(color: Colors.black12, blurRadius: 10),
-                          ],
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(products[index]['image'], height: 100),
-                            SizedBox(height: 10),
-                            Text(
-                              'Product Name',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              products[index]['price'],
-                              style: TextStyle(
-                                color: AppColors.greentextcolor,
-                                fontWeight: FontWeight.bold,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ProductDetailPage()),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.black12, blurRadius: 10),
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                  products[index]['image'], height: 100),
+                              SizedBox(height: 10),
+                              Text(
+                                'Product Name',
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
+                              SizedBox(height: 5),
+                              Text(
+                                products[index]['price'],
+                                style: TextStyle(
+                                  color: AppColors.greentextcolor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
