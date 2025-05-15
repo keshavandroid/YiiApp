@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/cart_screen.dart';
 import 'package:yii_app/Widget/homescreen.dart';
+import 'package:yii_app/Widget/order_history_screen.dart';
 
 import '../Widget/addressscreen.dart';
 import '../const/color.dart';
@@ -27,13 +29,13 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       case 1:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => Homescreen()),
+          MaterialPageRoute(builder: (_) => OrderHistoryScreen()),
         );
         break;
       case 2:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => Homescreen()),
+          MaterialPageRoute(builder: (_) => CartScreen()),
         );
         break;
       case 3:

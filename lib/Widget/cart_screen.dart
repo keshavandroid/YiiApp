@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../common/CustomBottomNavBar.dart';
 import '../common/CustomHeader.dart';
 import '../const/color.dart';
+import 'checkout_screen.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -121,7 +123,12 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 minimumSize: const Size(double.infinity, 55),
               ),
-              onPressed: () {},
+              onPressed: () {
+                // Proceed to checkout logic
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CheckoutScreen()),
+                );              },
               child: const Text(
                 'Proceed Checkout',
                 style: TextStyle(fontSize: 16, color: Colors.white),
@@ -130,8 +137,9 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ]
         ,
-      )
-      ,
+      ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 2),
+
     );
   }
 
