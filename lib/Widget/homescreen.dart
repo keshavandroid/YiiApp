@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yii_app/Widget/notification_screen.dart';
 import 'package:yii_app/Widget/productscreen.dart';
+import 'package:yii_app/Widget/setting_screen.dart';
 import 'package:yii_app/const/color.dart';
 
 import '../common/CustomBottomNavBar.dart';
@@ -76,16 +78,36 @@ class _HomescreenState extends State<Homescreen>
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image.asset(
-                                'assets/images/setting.png',
-                                height: 35,
-                              ),
-                              const SizedBox(width: 10),
 
-                              Image.asset(
-                                'assets/images/notification.png',
-                                height: 35,
+                              GestureDetector(
+                                onTap: () {
+                                  // Add your desired action here
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => SettingScreen()),
+                                  );                                },
+                                child: Image.asset(
+                                  'assets/images/setting.png',
+                                  height: 35,
+                                ),
                               ),
+
+
+
+                              const SizedBox(width: 10),
+                              GestureDetector(
+                                onTap: () {
+                                  // Add your desired action here
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => NotificationScreen()),
+                                  );                                },
+                                child: Image.asset(
+                                  'assets/images/notification.png',
+                                  height: 35,
+                                ),
+                              ),
+
                             ],
                           ),
                         ],
