@@ -4,14 +4,14 @@ import '../common/CustomBottomNavBar.dart';
 import '../common/CustomHeader.dart';
 import '../const/color.dart';
 
-class OrderHistoryScreen extends StatefulWidget {
-  const OrderHistoryScreen({super.key});
+class DeliveryOrders extends StatefulWidget {
+  const DeliveryOrders({super.key});
 
   @override
-  State<OrderHistoryScreen> createState() => _OrderHistoryScreenState();
+  State<DeliveryOrders> createState() => _DeliveryOrdersState();
 }
 
-class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
+class _DeliveryOrdersState extends State<DeliveryOrders> {
   final List<Map<String, dynamic>> orderList = [
     {
       'image': 'assets/images/tomato.png',
@@ -20,6 +20,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': '04 April',
       'time': '10:00 AM',
       'price': 10.0,
+      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
     },
     {
       'image': 'assets/images/round_gourd.png',
@@ -28,6 +29,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': '05 April',
       'time': '11:00 AM',
       'price': 12.0,
+      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
     },
     {
       'image': 'assets/images/vegetable.png',
@@ -36,6 +38,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': '06 April',
       'time': '09:00 AM',
       'price': 15.0,
+      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+
     },
     {
       'image': 'assets/images/spinach.png',
@@ -44,6 +48,8 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
       'date': '07 April',
       'time': '08:00 AM',
       'price': 8.0,
+      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+
     },
   ];
 
@@ -51,7 +57,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F8F8),
-      appBar: CustomHeader(title: 'View Order History'),
+      appBar: CustomHeader(title: 'Orders'),
       body: Column(
         children: [
           Expanded(
@@ -67,6 +73,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen> {
                   date: order['date'],
                   time: order['time'],
                   price: order['price'],
+                  address: order['address'],
                 );
               },
             ),
@@ -85,6 +92,8 @@ class OrderCard extends StatelessWidget {
   final String date;
   final String time;
   final double price;
+  final String address;
+
 
   const OrderCard({
     super.key,
@@ -94,6 +103,7 @@ class OrderCard extends StatelessWidget {
     required this.date,
     required this.time,
     required this.price,
+    required this.address,
   });
 
   @override
@@ -151,6 +161,22 @@ class OrderCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Image.asset(
+                      'assets/images/ic_location.png',
+                      width: 15,
+                      height: 15,
+                      color: Colors.black, // optional tint
+                    ),
+                    const SizedBox(width: 4), // spacing between icon and text
+                    Text(
+                      "$address",
+                      style: const TextStyle(color: Colors.black54, fontSize: 16),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 4),
                 Row(
