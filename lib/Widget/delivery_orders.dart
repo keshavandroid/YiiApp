@@ -20,7 +20,7 @@ class _DeliveryOrdersState extends State<DeliveryOrders> {
       'date': '04 April',
       'time': '10:00 AM',
       'price': 10.0,
-      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+      'address': 'Akshya Nagar 1st Block 1st Cross,Rummy cross circle',
     },
     {
       'image': 'assets/images/round_gourd.png',
@@ -29,7 +29,7 @@ class _DeliveryOrdersState extends State<DeliveryOrders> {
       'date': '05 April',
       'time': '11:00 AM',
       'price': 12.0,
-      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
+      'address': 'Akshya Nagar 1st Block 1st Cross,Rummy cross circle',
     },
     {
       'image': 'assets/images/vegetable.png',
@@ -38,8 +38,7 @@ class _DeliveryOrdersState extends State<DeliveryOrders> {
       'date': '06 April',
       'time': '09:00 AM',
       'price': 15.0,
-      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
-
+      'address': 'Akshya Nagar 1st Block 1st Cross,Rummy cross circle',
     },
     {
       'image': 'assets/images/spinach.png',
@@ -48,8 +47,7 @@ class _DeliveryOrdersState extends State<DeliveryOrders> {
       'date': '07 April',
       'time': '08:00 AM',
       'price': 8.0,
-      'address':'Akshya Nagar 1st Block 1st Cross, Rammurthy nagar, Bangalore-560016',
-
+      'address': 'Akshya Nagar 1st Block 1st Cross,Rummy cross circle',
     },
   ];
 
@@ -80,7 +78,6 @@ class _DeliveryOrdersState extends State<DeliveryOrders> {
           ),
         ],
       ),
-      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
     );
   }
 }
@@ -93,7 +90,6 @@ class OrderCard extends StatelessWidget {
   final String time;
   final double price;
   final String address;
-
 
   const OrderCard({
     super.key,
@@ -164,17 +160,28 @@ class OrderCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      'assets/images/ic_location.png',
-                      width: 15,
-                      height: 15,
-                      color: Colors.black, // optional tint
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      // Slight adjustment if needed
+                     child:Image.asset(
+                        'assets/images/ic_location.png',
+                        width: 16,
+                        height: 16,
+                        color: Colors.black, // optional tint
+                      ),
                     ),
+
                     const SizedBox(width: 4), // spacing between icon and text
-                    Text(
-                      "$address",
-                      style: const TextStyle(color: Colors.black54, fontSize: 16),
+                    Expanded(
+                      child: Text(
+                        "$address",
+                        style: const TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -183,17 +190,20 @@ class OrderCard extends StatelessWidget {
                   children: [
                     Image.asset(
                       'assets/images/clock.png',
-                      width: 15,
-                      height: 15,
+                      width: 16,
+                      height: 16,
                       color: Colors.black, // optional tint
                     ),
                     const SizedBox(width: 4), // spacing between icon and text
                     Text(
                       "$date , $time",
-                      style: const TextStyle(color: Colors.black54, fontSize: 16),
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 16,
+                      ),
                     ),
                   ],
-                )
+                ),
                 // Text(
                 //   "$date , $time",
                 //   style: const TextStyle(color: Colors.black54, fontSize: 16),

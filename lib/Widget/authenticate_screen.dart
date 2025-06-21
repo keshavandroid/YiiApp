@@ -17,6 +17,11 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
   TabController? _tabController;
   int tabselectedOption = 0;
 
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
@@ -169,7 +174,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                           MaterialPageRoute(
                                             builder:
                                                 (context) =>
-                                                    const Loginscreenwithpass(),
+                                                    const Loginscreenwithpass(data:"customer"),
                                           ),
                                         );
                                       }

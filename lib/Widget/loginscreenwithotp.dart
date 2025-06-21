@@ -44,8 +44,7 @@ class _LoginscreenwithotpState extends State<LoginscreenwithotpScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
+      body: Stack(children: [
           Positioned(
             top: 0,
             right: 0,

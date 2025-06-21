@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:yii_app/Widget/authenticate_screen.dart';
 import 'package:yii_app/Widget/forgotpasswordscreen.dart';
 import 'package:yii_app/Widget/loginscreenwithpass.dart';
+import 'package:yii_app/Widget/userselectionscreen.dart';
 import 'package:yii_app/Widget/veriftotpscreen.dart';
 
 import 'loginscreenwithotp.dart';
@@ -35,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const AuthenticateScreen(),
+            builder: (context) => const UserSelectionScreen(),
           ),
         );
        // Replace with your actual route

@@ -3,10 +3,13 @@ import 'package:yii_app/Widget/homescreen.dart';
 
 import '../const/color.dart';
 import 'authenticate_screen.dart';
+import 'delivery_orders.dart';
 import 'forgotpasswordscreen.dart';
 
 class Loginscreenwithpass extends StatefulWidget {
-  const Loginscreenwithpass({super.key});
+  final String data;
+
+  const Loginscreenwithpass({super.key, required this.data});
 
   @override
   State<Loginscreenwithpass> createState() => _LoginscreenwithpassState();
@@ -92,13 +95,23 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     height: 50,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Homescreen(),
-                                          ),
-                                        );
-
+                                        if (widget.data == "deliverperson") {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => DeliveryOrders(),
+                                            ),
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => Homescreen(),
+                                            ),
+                                          );
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(
@@ -128,7 +141,9 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const Forgotpasswordscreen(),
+                                        builder:
+                                            (context) =>
+                                                const Forgotpasswordscreen(),
                                       ),
                                     );
                                   },
