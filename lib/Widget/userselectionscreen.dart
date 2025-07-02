@@ -4,6 +4,7 @@ import 'package:yii_app/Widget/loginscreenwithotp.dart';
 import 'package:yii_app/Widget/loginscreenwithpass.dart';
 
 import '../const/color.dart';
+import 'deliverypersonlogin.dart';
 
 class UserSelectionScreen extends StatefulWidget {
   const UserSelectionScreen({super.key});
@@ -80,6 +81,7 @@ class _UserSelectionScreenState extends State<UserSelectionScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
+
                             builder: (context) => const AuthenticateScreen(),
                           ),
                         );
@@ -104,7 +106,7 @@ class _UserSelectionScreenState extends State<UserSelectionScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Loginscreenwithpass(data:"deliverperson"),
+                            builder: (context) => const Deliverypersonlogin(),
                           ),
                         );
                       },

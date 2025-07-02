@@ -6,16 +6,15 @@ import 'authenticate_screen.dart';
 import 'delivery_orders.dart';
 import 'forgotpasswordscreen.dart';
 
-class Loginscreenwithpass extends StatefulWidget {
-  final String data;
+class Deliverypersonlogin extends StatefulWidget {
 
-  const Loginscreenwithpass({super.key, required this.data});
+  const Deliverypersonlogin({super.key});
 
   @override
-  State<Loginscreenwithpass> createState() => _LoginscreenwithpassState();
+  State<Deliverypersonlogin> createState() => _DeliverypersonloginState();
 }
 
-class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
+class _DeliverypersonloginState extends State<Deliverypersonlogin> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -95,25 +94,13 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     height: 50,
                                     child: ElevatedButton(
                                       onPressed: () {
-
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder:
-                                                (context) => Homescreen(),
+                                                (context) => DeliveryOrders(),
                                           ),
                                         );
-                                        // if (widget.data == "deliverperson") {
-                                        //   Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder:
-                                        //           (context) => DeliveryOrders(),
-                                        //     ),
-                                        //   );
-                                        // } else {
-                                        //
-                                        // }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(
@@ -137,26 +124,26 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(width: 10),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) =>
-                                                const Forgotpasswordscreen(),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text(
-                                    'Forgot Password?',
-                                    style: TextStyle(
-                                      color: AppColors.greentextcolor,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
+                                // const SizedBox(width: 10),
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     Navigator.push(
+                                //       context,
+                                //       MaterialPageRoute(
+                                //         builder:
+                                //             (context) =>
+                                //                 const Forgotpasswordscreen(),
+                                //       ),
+                                //     );
+                                //   },
+                                //   child: const Text(
+                                //     'Forgot Password?',
+                                //     style: TextStyle(
+                                //       color: AppColors.greentextcolor,
+                                //       fontSize: 16,
+                                //     ),
+                                //   ),
+                                // ),
                               ],
                             ),
                           ],
@@ -164,27 +151,7 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                       ),
                     ),
                     // Tab View content
-                    const SizedBox(height: 50),
 
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AuthenticateScreen(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Don’t have an account ? Register",
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.blacktextcolor,
-                          ),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yii_app/Widget/homescreen.dart';
 import 'package:yii_app/Widget/loginscreenwithotp.dart';
 import 'package:yii_app/Widget/loginscreenwithpass.dart';
 
 import '../const/color.dart';
+import '../services/api_service.dart';
 
 class AuthenticateScreen extends StatefulWidget {
   const AuthenticateScreen({super.key});
@@ -16,10 +18,13 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
   int selectedOption = 0;
   TabController? _tabController;
   int tabselectedOption = 0;
-
+  int countryID = 0;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+  TextEditingController();
   bool isLoading = false;
 
   @override
@@ -56,15 +61,15 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
             padding: const EdgeInsets.all(6),
             decoration: BoxDecoration(
               color:
-                  isSelected
-                      ? AppColors.greentextcolor
-                      : AppColors.greytextcolor,
+              isSelected
+                  ? AppColors.greentextcolor
+                  : AppColors.greytextcolor,
               shape: BoxShape.circle,
             ),
             child:
-                isSelected
-                    ? const Icon(Icons.circle, size: 15, color: Colors.white)
-                    : const SizedBox(width: 15, height: 15),
+            isSelected
+                ? const Icon(Icons.circle, size: 15, color: Colors.white)
+                : const SizedBox(width: 15, height: 15),
           ),
           const SizedBox(width: 10),
           Text(
@@ -89,7 +94,10 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
             right: 0,
             left: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.9,
               height: 219,
               child: Image.asset(
                 'assets/images/topgn.png',
@@ -101,7 +109,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
           Positioned(
             top: 180,
             // below top image
-            bottom: 230,
+            bottom: 170,
             // above bottom image
             left: 0,
             right: 0,
@@ -174,17 +182,18 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                           MaterialPageRoute(
                                             builder:
                                                 (context) =>
-                                                    const Loginscreenwithpass(data:"customer"),
+                                            const Loginscreenwithpass(
+                                              data: "customer",
+                                            ),
                                           ),
                                         );
-                                      }
-                                      else {
+                                      } else {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder:
                                                 (context) =>
-                                                    const LoginscreenwithotpScreen(),
+                                            const LoginscreenwithotpScreen(),
                                           ),
                                         );
                                       }
@@ -212,21 +221,55 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 24.0,
-                            ),
-                            // padding: const EdgeInsets.all(20),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 2.0),
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  buildTextField('Username'),
-                                  buildTextField('Email'),
-                                  buildTextField('Phone No.'),
-                                  buildTextField('Password', obscureText: true),
                                   buildTextField(
-                                    'Confirm Password',
-                                    obscureText: true,
+                                    controller: nameController,
+                                    hintText: 'Username',
+                                    onChanged: (value) {
+                                      // context.read<RegisterBloc>().add(
+                                      //   RegisterUserNameChanged(value),
+                                      // );
+                                    },
+                                  ),
+                                  buildTextField(
+                                    controller: emailController,
+                                    hintText: 'Email',
+                                    onChanged: (value) {
+                                      // context.read<RegisterBloc>().add(
+                                      //   RegisterUserNameChanged(value),
+                                      // );
+                                    },
+                                  ),
+                                  buildTextField(
+                                    controller: phoneController,
+                                    hintText: 'Phone No.',
+                                    onChanged: (value) {
+                                      // context.read<RegisterBloc>().add(
+                                      //   RegisterUserNameChanged(value),
+                                      // );
+                                    },
+                                  ),
+                                  buildTextField(
+                                    controller: passwordController,
+                                    hintText: 'Password',
+                                    onChanged: (value) {
+                                      // context.read<RegisterBloc>().add(
+                                      //   RegisterUserNameChanged(value),
+                                      // );
+                                    },
+                                  ),
+                                  buildTextField(
+                                    controller: confirmPasswordController,
+                                    hintText: 'Confirm Password',
+                                    onChanged: (value) {
+                                      // context.read<RegisterBloc>().add(
+                                      //   RegisterUserNameChanged(value),
+                                      // );
+                                    },
                                   ),
                                   const SizedBox(height: 20),
                                   Align(
@@ -235,7 +278,91 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                       width: 200,
                                       height: 50,
                                       child: ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          if (nameController.text.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Name cannot be blank.'),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          if (emailController.text.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Email cannot be blank.'),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          if (phoneController.text.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Phone cannot be blank.'),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                            return;
+                                          }
+                                          if (passwordController.text.isEmpty) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text(
+                                                    'Password cannot be blank.'),
+                                                backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                            return;
+                                          }
+
+                                          final response = await ApiService()
+                                              .register(
+                                            nameController.text,
+                                            emailController.text,
+                                            phoneController.text,
+                                            passwordController.text,
+                                            91,
+                                          );
+
+                                          print('response.status=${response.status}');
+
+                                          if (response.status == 1) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => Homescreen(),
+                                              ),
+                                            );
+                                          } else {
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).clearSnackBars();
+
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  response.message
+                                                ),
+                                                backgroundColor: Colors.red,
+                                                duration: const Duration(
+                                                  milliseconds: 1500,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: const Color(
                                             0xFF3E5622,
@@ -274,7 +401,10 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
             right: 0,
             left: 0,
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.9,
               height: 175,
               child: Image.asset(
                 'assets/images/btngreen.png',
@@ -288,19 +418,26 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
   }
 }
 
-Widget buildTextField(String hint, {bool obscureText = false}) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 5.0),
-    child: TextField(
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        hintText: hint,
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Color(0xFF3E5622)),
-        ),
+Widget buildTextField({
+  required TextEditingController controller,
+  required String hintText,
+  bool obscureText = false,
+  Function(String)? onChanged,
+  Widget? suffixIcon,
+  TextInputType? keyboardType,
+}) {
+  return TextField(
+    controller: controller,
+    obscureText: obscureText,
+    onChanged: onChanged,
+    keyboardType: keyboardType,
+    decoration: InputDecoration(
+      hintText: hintText,
+      enabledBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: Colors.grey,width: 1),
+      ),
+      focusedBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF3E5622)),
       ),
     ),
   );
