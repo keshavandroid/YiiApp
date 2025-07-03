@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:yii_app/model/login_model.dart';
 
 import '../model/register_model.dart';
 
@@ -7,13 +8,7 @@ class ApiService {
   static const String baseUrl =
       'https://keshavinfotechdemo2.com/keshav/KG1/YII/api';
 
-  Future<RegisterModel> register(
-    String userName,
-    String email,
-    String contactNumber,
-    String password,
-    int countryId,
-  ) async {
+  Future<RegisterModel> register(String userName, String email, String contactNumber, String password, int countryId) async {
     try {
       print('Attempting registration for user: $userName'); // Debug log
 
@@ -63,7 +58,26 @@ class ApiService {
     }
   }
 
-  // Future<BoothFormFieldsResponse> getBoothFormDetails({
+  Future<LoginModel> login(String email, String password) async {
+    final url =  Uri.parse('$baseUrl/login');
+
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'userName': email, 'password': password}),
+    );
+    final Map<String, dynamic> data = jsonDecode(response.body);
+    final Response = LoginModel.fromJson(data);
+
+    if (response.statusCode == 200) {
+      return Response;
+    } else {
+      throw Exception(Response.message);
+    }
+  }
+
+
+// Future<BoothFormFieldsResponse> getBoothFormDetails({
   //   required String type,
   //   String? searchWord,
   // })

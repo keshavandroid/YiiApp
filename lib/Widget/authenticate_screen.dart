@@ -336,18 +336,37 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                           print('response.status=${response.status}');
 
                                           if (response.status == 1) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) => Homescreen(),
-                                              ),
-                                            );
-                                          } else {
+
                                             ScaffoldMessenger.of(
                                               context,
                                             ).clearSnackBars();
-
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    response.message
+                                                ),
+                                                backgroundColor: Colors.green,
+                                                duration: const Duration(
+                                                  milliseconds: 500,
+                                                ),
+                                              ),
+                                            );
+                                            Future.delayed(const Duration(milliseconds: 1000), () {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder:
+                                                      (context) => Homescreen(),
+                                                ),
+                                              );
+                                            });
+                                          }
+                                          else {
+                                            ScaffoldMessenger.of(
+                                              context,
+                                            ).clearSnackBars();
                                             ScaffoldMessenger.of(
                                               context,
                                             ).showSnackBar(
@@ -357,7 +376,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                                 ),
                                                 backgroundColor: Colors.red,
                                                 duration: const Duration(
-                                                  milliseconds: 1500,
+                                                  milliseconds: 1000,
                                                 ),
                                               ),
                                             );

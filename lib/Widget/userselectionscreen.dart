@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yii_app/Widget/authenticate_screen.dart';
+import 'package:yii_app/Widget/homescreen.dart';
 import 'package:yii_app/Widget/loginscreenwithotp.dart';
 import 'package:yii_app/Widget/loginscreenwithpass.dart';
 
 import '../const/color.dart';
+import '../database/DBHelper.dart';
+import '../model/userdata_model.dart';
 import 'deliverypersonlogin.dart';
 
 class UserSelectionScreen extends StatefulWidget {
@@ -77,14 +80,33 @@ class _UserSelectionScreenState extends State<UserSelectionScreen> {
                       ),
                       backgroundColor: AppColors.white,
                       textcolor: AppColors.greentextcolor1,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
+                      onTap: () async {
+                      //  UserdataModel? userdata;
+                        final users = await DBHelper.getUsers();
+                        //setState(() => userdata = users);
 
-                            builder: (context) => const AuthenticateScreen(),
-                          ),
-                        );
+                        print('userdata?.userId=${users?.userId}');
+
+                        if(users != null && users.userId!=0)
+                          {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Homescreen(),
+                              ),
+                            );
+                          }
+                        else
+                          {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+
+                                builder: (context) => const AuthenticateScreen(),
+                              ),
+                            );
+                          }
+
                       },
                     ),
                   ),

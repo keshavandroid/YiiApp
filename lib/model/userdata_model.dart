@@ -29,4 +29,29 @@ class UserdataModel {
       countryId: json['countryId'].toString(),
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'userId': userId,
+      'userName': userName,
+      'email': email,
+      'userToken':userToken,
+      'phoneNumber':phoneNumber,
+      'otp':otp,
+      'countryId':countryId
+    };
+  }
+
+  factory UserdataModel.fromMap(Map<String, dynamic> map) {
+    return UserdataModel(
+      userId: map['userId'],
+      userName: map['userName'],
+      email: map['email'],
+      userToken: map['userToken'],
+      phoneNumber: map['phoneNumber'],
+      otp: map['otp'].toString(),
+      countryId: map['countryId'].toString(),
+    );
+  }
+
 } 

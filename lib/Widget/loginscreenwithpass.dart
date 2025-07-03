@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yii_app/Widget/homescreen.dart';
+import 'package:yii_app/model/login_model.dart';
+import 'package:yii_app/model/userdata_model.dart';
 
 import '../const/color.dart';
+import '../database/DBHelper.dart';
+import '../services/api_service.dart';
 import 'authenticate_screen.dart';
 import 'delivery_orders.dart';
 import 'forgotpasswordscreen.dart';
@@ -19,6 +23,14 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  void _addUser(UserdataModel result) async {
+    final user = UserdataModel(userId:result.userId,userName: result.userName,
+        userToken: result.userToken, email: result.email,phoneNumber: result.phoneNumber,otp: result.otp,countryId: result.countryId);
+    await DBHelper.insertUser(user);
+
+  }
+
 
   @override
   void dispose() {
@@ -82,8 +94,8 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            buildTextField('Email Address'),
-                            buildTextField('Password'),
+                            buildTextField('Email Address',_emailController),
+                            buildTextField('Password',_passwordController),
                             const SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,26 +106,82 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
                                     width: 150,
                                     height: 50,
                                     child: ElevatedButton(
-                                      onPressed: () {
+                                      onPressed: () async {
+                                        if (_emailController.text.isEmpty ||
+                                            _passwordController.text.isEmpty) {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).clearSnackBars();
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Email and Password cannot be empty.'),
+                                              backgroundColor: Colors.red,
+                                              duration: Duration(
+                                                milliseconds: 1000,
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
 
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (context) => Homescreen(),
-                                          ),
+                                        final response = await ApiService()
+                                            .login(
+                                          _emailController.text,
+                                          _passwordController.text,
                                         );
-                                        // if (widget.data == "deliverperson") {
-                                        //   Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //       builder:
-                                        //           (context) => DeliveryOrders(),
-                                        //     ),
-                                        //   );
-                                        // } else {
-                                        //
-                                        // }
+
+                                        print(
+                                            'response.status=${response.status}');
+
+                                        if (response.status == 1) {
+
+                                          _addUser(response.result);
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).clearSnackBars();
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text(response.message),
+                                              backgroundColor: Colors.green,
+                                              duration: const Duration(
+                                                milliseconds: 500,
+                                              ),
+                                            ),
+                                          );
+                                          Future.delayed(
+                                              const Duration(
+                                                  milliseconds: 1000), () {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Homescreen(),
+                                              ),
+                                            );
+                                          });
+                                        } else {
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).clearSnackBars();
+                                          ScaffoldMessenger.of(
+                                            context,
+                                          ).showSnackBar(
+                                            SnackBar(
+                                              content:
+                                                  Text(response.message),
+                                              backgroundColor: Colors.red,
+                                              duration: const Duration(
+                                                milliseconds: 1000,
+                                              ),
+                                            ),
+                                          );
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: const Color(
@@ -209,10 +277,11 @@ class _LoginscreenwithpassState extends State<Loginscreenwithpass> {
   }
 }
 
-Widget buildTextField(String hint, {bool obscureText = false}) {
+Widget buildTextField(String hint, TextEditingController control, {bool obscureText = false}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 5.0),
     child: TextField(
+      controller: control,
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hint,
