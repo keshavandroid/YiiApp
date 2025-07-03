@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:yii_app/Widget/myprofile_screen.dart';
 import 'package:yii_app/Widget/select_address_screen.dart';
+import 'package:yii_app/Widget/select_address_screen.dart';
+import 'package:yii_app/Widget/userselectionscreen.dart';
 import 'package:yii_app/const/color.dart';
 
 import '../common/CustomBottomNavBar.dart';
 import '../common/CustomHeader.dart';
+import '../database/DBHelper.dart';
+import '../model/userdata_model.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -26,6 +30,51 @@ class _SettingScreenState extends State<SettingScreen> {
     "Logout",
   ];
 
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: Text("Logout"),
+          content: Text("Are you sure you want to logout?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Cancel", style: TextStyle(color: AppColors.red)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text(
+                "Logout",
+                style: TextStyle(color: AppColors.greentextcolor),
+              ),
+              onPressed: () async {
+                final users = await DBHelper.getUsers();
+                await DBHelper.deleteUser(users!.userId);
+                // Perform logout operation here
+                Navigator.of(context).pop(); // Close the dialog
+                // Example: Navigate to login screen
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserSelectionScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  final List<IconData> icons = [
+    Icons.person,
+    // ... add other icons
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +91,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => MyprofileScreen(),
-                    ),
+                    MaterialPageRoute(builder: (context) => MyprofileScreen()),
                   );
                 },
                 child: Card(
@@ -69,8 +116,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Image.asset('assets/images/right_arrow.png',
-                          fit: BoxFit.contain,height: 20,color: AppColors.greentextcolor1,
+                        Image.asset(
+                          'assets/images/right_arrow.png',
+                          fit: BoxFit.contain,
+                          height: 20,
+                          color: AppColors.greentextcolor1,
                         ),
                       ],
                     ),
@@ -103,8 +153,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Image.asset('assets/images/right_arrow.png',
-                          fit: BoxFit.contain,height: 20,color: AppColors.greentextcolor1,
+                        Image.asset(
+                          'assets/images/right_arrow.png',
+                          fit: BoxFit.contain,
+                          height: 20,
+                          color: AppColors.greentextcolor1,
                         ),
                       ],
                     ),
@@ -137,8 +190,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Image.asset('assets/images/right_arrow.png',
-                          fit: BoxFit.contain,height: 20,color: AppColors.greentextcolor1,
+                        Image.asset(
+                          'assets/images/right_arrow.png',
+                          fit: BoxFit.contain,
+                          height: 20,
+                          color: AppColors.greentextcolor1,
                         ),
                       ],
                     ),
@@ -170,8 +226,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Image.asset('assets/images/right_arrow.png',
-                          fit: BoxFit.contain,height: 20,color: AppColors.greentextcolor1,
+                        Image.asset(
+                          'assets/images/right_arrow.png',
+                          fit: BoxFit.contain,
+                          height: 20,
+                          color: AppColors.greentextcolor1,
                         ),
                       ],
                     ),
@@ -181,6 +240,9 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(height: 5),
               // Categories
               GestureDetector(
+                onTap: () {
+                  _showLogoutDialog(context);
+                },
                 child: Card(
                   color: Colors.white,
                   margin: const EdgeInsets.symmetric(vertical: 8),
@@ -203,8 +265,11 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Image.asset('assets/images/right_arrow.png',
-                          fit: BoxFit.contain,height: 20,color: AppColors.greentextcolor1,
+                        Image.asset(
+                          'assets/images/right_arrow.png',
+                          fit: BoxFit.contain,
+                          height: 20,
+                          color: AppColors.greentextcolor1,
                         ),
                       ],
                     ),

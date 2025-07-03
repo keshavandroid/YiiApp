@@ -10,5 +10,6 @@ class AppColors {
   static const Color greytextcolor = Color(0xFFD9D9D9); // Replace with your color code
   static const Color greysearchcolor = Color(0xFFEBEBEB); // Replace with your color code
   static const Color btncolor = Color(0xFF47B3B8); // Replace with your color code
-  static const Color white = Color(0xFFFFFFFF); // Replace with your color code
+  static const Color white = Color(0xFFFFFFFF);
+  static const Color red = Colors.red;
 }
