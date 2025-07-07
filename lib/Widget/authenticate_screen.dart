@@ -4,6 +4,8 @@ import 'package:yii_app/Widget/loginscreenwithotp.dart';
 import 'package:yii_app/Widget/loginscreenwithpass.dart';
 
 import '../const/color.dart';
+import '../database/DBHelper.dart';
+import '../model/userdata_model.dart';
 import '../services/api_service.dart';
 
 class AuthenticateScreen extends StatefulWidget {
@@ -39,7 +41,12 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
     });
     super.initState();
   }
+  void _addUser(UserdataModel result) async {
+    final user = UserdataModel(userId:result.userId,userName: result.userName,
+        userToken: result.userToken, email: result.email,phoneNumber: result.phoneNumber,otp: result.otp,countryId: result.countryId);
+    await DBHelper.insertUser(user);
 
+  }
   @override
   void dispose() {
     _tabController?.dispose();
@@ -336,6 +343,8 @@ class _AuthenticateScreenState extends State<AuthenticateScreen>
                                           print('response.status=${response.status}');
 
                                           if (response.status == 1) {
+
+                                            _addUser(response.result);
 
                                             ScaffoldMessenger.of(
                                               context,
